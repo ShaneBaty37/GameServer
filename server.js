@@ -31,7 +31,7 @@ wss.on('connection', function connection(client){
 		
 		console.log("Player Message")
 		console.log(dataJSON)
-		client.send({data})
+		client.send(data)
 	})
 
 	//Method notifies when client disconnects
