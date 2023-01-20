@@ -31,6 +31,7 @@ wss.on('connection', function connection(client){
 		var dataJSON = JSON.parse(data)
 		
 		console.log("Player Message")
+<<<<<<< HEAD
 		
 		if (dataJSON.isBot == false)
 		{
@@ -42,6 +43,10 @@ wss.on('connection', function connection(client){
 			client.send(`${lastData}`)
 		}
 			
+=======
+		console.log(dataJSON)
+		client.send(data)
+>>>>>>> a3a970285e4a1e5141ed1458650a78bbe75c7b1b
 	})
 
 	//Method notifies when client disconnects
