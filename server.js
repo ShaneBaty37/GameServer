@@ -1,7 +1,7 @@
 var uuid = require('uuid-random');
 var lastData;
 const WebSocket = require('ws')
-
+var recClient;
 const wss = new WebSocket.WebSocketServer({port:8080}, ()=> {
 	console.log('server started')
 })
@@ -30,23 +30,30 @@ wss.on('connection', function connection(client){
 	client.on('message', (data) => {
 		var dataJSON = JSON.parse(data)
 		
-		console.log("Player Message")
-<<<<<<< HEAD
+		
 		
 		if (dataJSON.isBot == false)
 		{
-			lastData = data;
-			console.log(dataJSON)
+
+				
+				lastData = dataJSON;
+				
+				if (recClient != null)
+				{
+					console.log("Sending Update")
+					console.log(dataJSON)
+					recClient.send(`${data}`)
+				}
+
+
+			
 		}
 		else
 		{
-			client.send(`${lastData}`)
+			recClient = client;
+			//client.send(`${lastData}`)
 		}
 			
-=======
-		console.log(dataJSON)
-		client.send(data)
->>>>>>> a3a970285e4a1e5141ed1458650a78bbe75c7b1b
 	})
 
 	//Method notifies when client disconnects
